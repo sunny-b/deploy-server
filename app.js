@@ -21,13 +21,9 @@ function isProperTrigger(sender, branch) {
 }
 
 function deploy(res) {
-  childProcess.spawn(deployPath, function(err, stdout, stderr) {
-    if (err) {
-      console.error(err);
-      return res.send(500);
-    }
-    res.send(200);
-  });
+  childProcess.spawn(deployPath);
+
+  res.send(200);
 }
 
 module.exports = app;
