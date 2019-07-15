@@ -5,7 +5,7 @@ var githubUsername = 'sunny-b';
 var githubBranch = 'master';
 var deployPath = 'cd /home/sunny && sudo ./deploy.sh';
 
-app.use(express.bodyParser());
+app.use(express.json());
 
 app.post("/webhooks/github", function (req, res) {
     console.log(req.body)
