@@ -8,7 +8,6 @@ var deployPath = 'cd /home/sunny && sudo ./deploy.sh';
 app.use(express.json());
 
 app.post("/webhooks/github", function (req, res) {
-    console.log(req.body)
     var sender = req.body.sender;
     var branch = req.body.ref;
 
