@@ -18,7 +18,7 @@ app.post("/webhooks/github", function (req, res) {
 })
 
 function isProperTrigger(sender, branch) {
-  return branch.indexOf(branch) > -1 && sender.login === username;
+  return branch.indexOf(githubBranch) > -1 && sender.login === githubUsername;
 }
 
 function deploy(res) {
