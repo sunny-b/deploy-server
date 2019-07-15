@@ -3,7 +3,7 @@ var app = express();
 var childProcess = require('child_process');
 var githubUsername = 'sunny-b';
 var githubBranch = 'master';
-var deployPath = 'cd /home/sunny && sudo ./deploy.sh';
+var deployPath = 'cd /home/sunny && ./deploy.sh';
 
 app.use(express.json());
 
