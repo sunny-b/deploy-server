@@ -3,8 +3,12 @@ var app = express();
 var childProcess = require('child_process');
 var githubUsername = 'sunny-b';
 var githubBranch = 'master';
-var deployPath = 'cd /home/sunny && ./deploy.sh';
+var deployPath = 'cd /home/sunny && sudo ./deploy.sh';
 
+app.configure(function(){
+  app.use(express.bodyParser());
+  app.use(app.router);
+});
 
 app.post("/webhooks/github", function (req, res) {
     var sender = req.body.sender;
