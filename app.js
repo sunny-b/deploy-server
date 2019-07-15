@@ -8,6 +8,7 @@ var deployPath = 'cd /home/sunny && ./deploy.sh';
 app.use(express.json());
 
 app.post("/webhooks/github", function (req, res) {
+    console.log("Received GitHub Webhook")
     var sender = req.body.sender;
     var branch = req.body.ref;
 
@@ -21,11 +22,13 @@ function isProperTrigger(sender, branch) {
 }
 
 function deploy(res) {
+  console.log("Deploying new Docker instance")
   childProcess.exec(deployPath, function(err, stdout, stderr) {
     if (err) {
       console.error(err);
       return res.send(500);
     }
+    console.log("Webhook completed successfully")
     res.send(200);
   });
 }
