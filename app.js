@@ -20,8 +20,8 @@ function isProperTrigger(sender, branch) {
   return branch.indexOf(githubBranch) > -1 && sender.login === githubUsername;
 }
 
-async function deploy(res) {
-  childProcess.exec(deployPath, function(err, stdout, stderr) {
+function deploy(res) {
+  childProcess.spawn(deployPath, function(err, stdout, stderr) {
     if (err) {
       console.error(err);
       return res.send(500);
