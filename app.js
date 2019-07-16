@@ -1,9 +1,8 @@
 var express = require("express");
 var crypto = require("crypto")
-var bcrypt = require("bcrypt")
+var childProcess = require('child_process');
 
 var app = express();
-var childProcess = require('child_process');
 var githubUsername = 'sunny-b';
 var githubBranch = 'master';
 var deployPath = 'cd /home/sunny && ./deploy.sh';
@@ -13,7 +12,7 @@ app.use(express.json());
 
 app.post("/webhooks/github", function (req, res) {
   console.log("Received GitHub Webhook");
-  console.log(JSON.stringify(req.body));
+  console.log("Comparing signatures");
 
   if (!isProperTrigger(req)) {
     console.error("invalid webhook");
@@ -30,7 +29,7 @@ app.post("/webhooks/github", function (req, res) {
 function isProperTrigger(req) {
   var sig = "sha1=" + crypto.createHmac('sha1', secret).update(JSON.stringify(req.body)).digest('hex');
 
-  return bcrypt.compareSync(req.headers['x-hub-signature'], sig);
+  return req.headers['x-hub-signature'] === sig;
 }
 
 function deploy(res) {
